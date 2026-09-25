@@ -1,50 +1,88 @@
 # Final QA Report
 
-**Research bundle status: PASS.**  
-**Current CI status: PASS.**  
-**Current official NASA empirical rebuild status: PASS.**
+## Release verdict
 
-## Scientific correction completed
-- replaced the retrospective 60%-of-final-history split with fixed 40/60/80-cycle checkpoints;
-- removed dependence on each cell's eventual observation horizon;
-- reframed the study around technical-performance margin **and forecast maturity**;
-- retained B0007 as a bounded false-early-warning case rather than presenting projection as observation.
+**Status: PASS for a reproducible portfolio research package after the current rebuild.**
 
-## Data and provenance
-- canonical source: NASA Ames PCoE Battery Data Set;
-- cells: B0005, B0006, B0007, B0018;
-- complete packaged derived evidence: **636 discharge cycles**;
-- official archive SHA-256: `82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e`;
-- official NASA nested archive is downloaded and parsed directly during the rebuild;
-- no synthetic fallback is permitted.
+This QA file verifies consistency. It is not the scientific report. The research narrative is in [REPORT.md](REPORT.md).
 
-## Verified release results
-- NASA EOL boundary: **1.4 Ah**
-- checkpoints: **40, 60, 80 cycles**
-- observed first ≤1.4 Ah: B0005 = 125, B0006 = 109, B0018 = 97; B0007 = no crossing through cycle 168
-- MAE across crossing cells:
-  - cycle 40: **102.399 cycles**
-  - cycle 60: **35.852 cycles**
-  - cycle 80: **11.942 cycles**
-- mean forecast revision:
-  - 40→60: **100.046 cycles**
-  - 60→80: **38.012 cycles**
-- B0007 checkpoint-80 projection: **158.219 cycles**, but observed capacity stays above 1.4 Ah through cycle 168
+## Scope checked
 
-## Engineering QA
-- complete cycle-level derived evidence: PASS
-- battery summary consistency: PASS
-- 12 checkpoint recomputations: PASS
-- fixed checkpoints precede all observed threshold events: PASS
-- tests: PASS
-- reproducible SVG generation: PASS
-- CI: PASS
-- official NASA empirical rebuild: PASS
-- source hash enforcement: PASS
-- full MIT license: PASS
-- manifest/documentation synchronization: PASS
+The repository was reviewed for agreement across:
+
+- official NASA source identity;
+- source archive integrity;
+- all 636 packaged discharge observations;
+- four battery summaries;
+- 12 checkpoint forecasts;
+- aggregate error and revision metrics;
+- false warning logic;
+- analysis code;
+- tests;
+- continuous integration;
+- scientific figures;
+- README;
+- report;
+- paper blueprint;
+- systems engineering framing;
+- claim boundaries.
+
+## Numerical consistency
+
+| Check | Released value | Status |
+|---|---:|---|
+| Discharge observations | 636 | PASS |
+| B0005 cycles | 168 | PASS |
+| B0006 cycles | 168 | PASS |
+| B0007 cycles | 168 | PASS |
+| B0018 cycles | 132 | PASS |
+| NASA EOL boundary | 1.4 Ah | PASS |
+| Checkpoints | 40, 60, 80 | PASS |
+| B0005 first ≤ 1.4 Ah | 125 | PASS |
+| B0006 first ≤ 1.4 Ah | 109 | PASS |
+| B0018 first ≤ 1.4 Ah | 97 | PASS |
+| B0007 observed crossing | none through 168 | PASS |
+| Checkpoint 80 MAE | 11.942 cycles | PASS |
+| 40→60 mean revision | 100.046 cycles | PASS |
+| 60→80 mean revision | 38.012 cycles | PASS |
+| B0007 checkpoint 80 warning | false early warning | PASS |
+
+## Scientific corrections retained
+
+The released design uses fixed checkpoints rather than the earlier first 60% of eventual history rule.
+
+The documentation now makes clear that:
+
+- aggregate MAE improvement is not universal cell level improvement;
+- B0006 becomes less accurate across the released checkpoints;
+- checkpoint 40 mean error is strongly influenced by B0005;
+- B0007 is a no crossing case within the observed horizon;
+- forecast revision is descriptive maturity evidence rather than calibrated uncertainty;
+- capacity is used as a TPM style laboratory performance parameter rather than claimed as a full system TPM.
+
+## Figure repairs
+
+All five figures are rebuilt with semantic color.
+
+The public portfolio figures now show:
+
+1. actual battery capacity trajectories, the 1.4 Ah boundary, fixed checkpoints, and observed crossing status;
+2. the complete fixed checkpoint data processing and evaluation pipeline.
+
+The supporting figures now show cell level error heterogeneity, forecast revision, and evidence boundaries.
+
+## Evidence integrity
+
+The official source rebuild uses the NASA archive directly and enforces the released archive SHA 256:
+
+```text
+82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e
+```
+
+No synthetic fallback is permitted.
 
 ## Interpretation boundary
-This is a transparent four-cell laboratory study of margin forecasting and forecast maturity. It is not a production battery-management system, a calibrated uncertainty model, or evidence of cross-cell/chemistry generalization.
 
-No open scientific, source-provenance, data, code, test, CI, figure, reproducibility, or documentation defect remains in this QA release.
+PASS means the repository is internally coherent and computationally reproducible for its declared scope.
+
+It does not establish production battery management performance, calibrated RUL uncertainty, cross chemistry generalization, or state of the art prognostics accuracy.
