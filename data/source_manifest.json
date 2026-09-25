@@ -6,7 +6,7 @@
   "nasa_repository_page": "https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/",
   "nasa_open_data_page": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
   "official_archive_url": "https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip",
-  "official_archive_sha256": "",
+  "official_archive_sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
   "cells": [
     "B0005",
     "B0006",

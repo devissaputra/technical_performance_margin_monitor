@@ -10,7 +10,7 @@ if str(ROOT) not in sys.path:sys.path.insert(0,str(ROOT))
 from research.model import BATTERIES,CHECKPOINTS,THRESHOLD_AH,analyze_series
 
 NASA_URL="https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip"
-EXPECTED_ARCHIVE_SHA256=""  # populated after first verified official-source rebuild
+EXPECTED_ARCHIVE_SHA256="82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e"
 
 def nested_mats(blob):
     wanted={f"{b}.mat" for b in BATTERIES};found={}

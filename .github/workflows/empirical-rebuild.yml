@@ -1,15 +1,8 @@
 name: Official NASA empirical rebuild
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - ".github/workflows/empirical-rebuild.yml"
-      - "research/**"
-      - "scripts/fetch_and_analyze.py"
-      - "data/derived/**"
-      - "data/source_manifest.json"
-      - "results/**"
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
