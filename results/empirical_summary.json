@@ -3,28 +3,36 @@
   "headline_metrics": {
     "n_discharge_cycles": 636,
     "eol_threshold_ah": 1.4,
-    "monitoring_checkpoints_cycles": [
-      40,
-      60,
-      80
-    ],
+    "monitoring_checkpoints_cycles": [40, 60, 80],
     "observed_eol_cycles": {
       "B0005": 125,
       "B0006": 109,
       "B0007": null,
       "B0018": 97
     },
+    "checkpoint_40_mae_cycles_crossing_cells": 102.399,
+    "checkpoint_60_mae_cycles_crossing_cells": 35.852,
     "checkpoint_80_mae_cycles_crossing_cells": 11.942,
+    "checkpoint_40_median_abs_error_cycles_crossing_cells": 18.069,
+    "checkpoint_60_median_abs_error_cycles_crossing_cells": 9.715,
     "checkpoint_80_median_abs_error_cycles_crossing_cells": 15.566,
     "mean_forecast_revision_40_to_60_cycles": 100.046,
     "mean_forecast_revision_60_to_80_cycles": 38.012,
     "b0005_projection_cycle_40": 413.782,
     "b0005_projection_cycle_60": 216.817,
     "b0005_projection_cycle_80": 145.025,
+    "b0006_abs_error_cycle_40": 0.346,
+    "b0006_abs_error_cycle_60": 6.025,
+    "b0006_abs_error_cycle_80": 15.566,
+    "b0018_abs_error_cycle_40": 18.069,
+    "b0018_abs_error_cycle_60": 9.715,
+    "b0018_abs_error_cycle_80": 0.236,
     "b0007_projection_cycle_80": 158.219,
+    "b0007_observed_horizon_cycle": 168,
     "b0007_false_early_warning_at_80": true
   },
-  "finding": "Fixed checkpoints remove future-horizon dependence. Across the three cells that later cross 1.4 Ah, mean absolute threshold-cycle error falls from 102.399 cycles at checkpoint 40 to 35.852 at 60 and 11.942 at 80. Mean forecast revision falls from 100.046 cycles between checkpoints 40→60 to 38.012 between 60→80, but substantial cell-level instability remains. At checkpoint 80, B0007 projects a crossing near cycle 158.219 although no 1.4 Ah crossing is observed through cycle 168.",
+  "finding": "Fixed checkpoints remove future-horizon dependence. Across the three cells that later cross 1.4 Ah, mean absolute threshold-cycle error falls from 102.399 cycles at checkpoint 40 to 35.852 at 60 and 11.942 at 80. That aggregate improvement is heterogeneous: B0005 improves sharply, B0018 becomes highly accurate by cycle 80, while B0006 absolute error grows from 0.346 to 15.566 cycles. Mean forecast revision falls from 100.046 cycles between checkpoints 40 and 60 to 38.012 between 60 and 80. B0007 projects a crossing near cycle 158.219 at checkpoint 80 although no 1.4 Ah crossing is observed through cycle 168.",
   "source": "NASA Ames Prognostics Center of Excellence Battery Data Set (B0005, B0006, B0007, B0018)",
-  "retrieved": "2026-09-25"
+  "retrieved": "2026-09-25",
+  "interpretation_boundary": "Transparent four-cell laboratory baseline. Forecast revision is not calibrated uncertainty; capacity is used as a TPM-style performance parameter, not as a complete system-level TPM."
 }
