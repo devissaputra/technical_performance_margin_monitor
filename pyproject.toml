@@ -1,7 +1,7 @@
 [project]
 name = "technical-performance-margin-monitor"
-version = "1.1.0"
-description = "Fixed-checkpoint NASA battery technical-performance-margin and forecast-maturity study."
+version = "1.2.0"
+description = "Fixed-checkpoint NASA battery performance-margin and forecast-maturity research package."
 requires-python = ">=3.10"
 dependencies = []
 
