@@ -1,0 +1,18 @@
+{
+  "study_title": "Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data",
+  "design": "Secondary prognostics analysis of laboratory battery aging time series",
+  "retrieved_for_analysis": "2026-09-25",
+  "source_name": "NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)",
+  "source_page": "https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/",
+  "direct_data_url": "https://raw.githubusercontent.com/amirhossein-sadeghi2003/battery-health-forecasting-baselines/e414d2e00ecc369d042637df6a6147a948718649/data/processed/discharge_capacity.csv",
+  "doi": "",
+  "license_note": "Primary NASA dataset is public. The convenience CSV is a transparent extraction of NASA MATLAB files; cite NASA/Saha & Goebel and the conversion source.",
+  "raw_data_redistributed": false,
+  "derived_empirical_results_in_repository": true,
+  "claim_boundary": "This is a transparent prognostics baseline, not a validated production health-management model. The processed CSV is a convenience derivative of the NASA source. B0007 demonstrates that a projected crossing inside the observed horizon need not actually occur; projection is not observation.",
+  "repository_slug": "technical_performance_margin_monitor",
+  "supersedes_prototype_slug": "technical_performance_margin_monitor",
+  "convenience_conversion_source": "https://github.com/amirhossein-sadeghi2003/battery-health-forecasting-baselines",
+  "convenience_conversion_commit": "e414d2e00ecc369d042637df6a6147a948718649",
+  "convenience_file_blob_sha": "adc395fdf25c6fa1b911535dc0ffc1c2a10e589e"
+}

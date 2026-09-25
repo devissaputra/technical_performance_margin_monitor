@@ -1,0 +1,10 @@
+[project]
+name = "technical-performance-margin-monitor"
+version = "1.0.0"
+description = "Empirical battery-aging technical-performance-margin study using NASA Li-ion discharge-capacity data."
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

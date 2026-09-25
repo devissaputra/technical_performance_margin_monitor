@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this empirical research bundle, cite this repository and the primary dataset/source documented in docs/references.md."
+title: "Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data"
+type: software
+authors:
+  - family-names: Saputra
+    given-names: Devis W.
+date-released: 2026-09-25
+license: MIT
+repository-code: "https://github.com/devissaputra/technical_performance_margin_monitor"
+keywords:
+  - systems-engineering
+  - technical-performance-measures
+  - prognostics
+  - battery-aging
+  - nasa-data
+  - empirical-study
+  - reproducible-research

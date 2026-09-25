@@ -1,0 +1,22 @@
+{
+  "study": "Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data",
+  "headline_metrics": {
+    "n_discharge_cycles": 636,
+    "eol_threshold_ah": 1.4,
+    "b0005_observed_eol_cycle": 125,
+    "b0005_projected_eol_cycle": 130.5,
+    "b0006_observed_eol_cycle": 109,
+    "b0006_projected_eol_cycle": 98.9,
+    "b0018_observed_eol_cycle": 97,
+    "b0018_projected_eol_cycle": 97.2,
+    "training_fraction": 0.6,
+    "b0005_projection_error_cycles": 5.5,
+    "b0006_projection_error_cycles": -10.1,
+    "b0018_projection_error_cycles": 0.2,
+    "b0007_projected_eol_cycle": 150.1,
+    "b0007_observed_eol_cycle": null
+  },
+  "finding": "Using only the first 60% of each battery history, the linear baseline projects the 1.4 Ah crossing 5.5 cycles late for B0005, 10.1 cycles early for B0006, and 0.2 cycles late for B0018. B0007 is projected to cross near cycle 150 even though its observed capacity remains above 1.4 Ah through cycle 168, exposing a false early threshold prediction and the limits of a single linear trend.",
+  "source": "NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)",
+  "retrieved": "2026-09-25"
+}

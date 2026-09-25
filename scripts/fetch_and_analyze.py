@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+import csv,io,json,urllib.request
+from research.model import linear_threshold_projection
+URL='https://raw.githubusercontent.com/amirhossein-sadeghi2003/battery-health-forecasting-baselines/e414d2e00ecc369d042637df6a6147a948718649/data/processed/discharge_capacity.csv'
+rows=list(csv.DictReader(io.StringIO(urllib.request.urlopen(URL).read().decode('utf-8-sig')))); out=[]
+for battery in sorted({r['battery_id'] for r in rows}):
+    series=[(int(r['discharge_index']),float(r['capacity_ah'])) for r in rows if r['battery_id']==battery]
+    z=linear_threshold_projection(series,threshold=1.4,fraction=.60); z['battery']=battery; z['n_cycles']=len(series); z['projection_error']=None if z['observed_eol'] is None else z['projected_eol']-z['observed_eol']; out.append(z)
+by={x['battery']:x for x in out}
+summary={'study':'Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data','headline_metrics':{'n_discharge_cycles':len(rows),'eol_threshold_ah':1.4,'b0005_observed_eol_cycle':by['B0005']['observed_eol'],'b0005_projected_eol_cycle':round(by['B0005']['projected_eol'],1),'b0006_observed_eol_cycle':by['B0006']['observed_eol'],'b0006_projected_eol_cycle':round(by['B0006']['projected_eol'],1),'b0018_observed_eol_cycle':by['B0018']['observed_eol'],'b0018_projected_eol_cycle':round(by['B0018']['projected_eol'],1),'training_fraction':0.6,'b0005_projection_error_cycles':round(by['B0005']['projection_error'],1),'b0006_projection_error_cycles':round(by['B0006']['projection_error'],1),'b0018_projection_error_cycles':round(by['B0018']['projection_error'],1),'b0007_projected_eol_cycle':round(by['B0007']['projected_eol'],1),'b0007_observed_eol_cycle':by['B0007']['observed_eol']},'finding':'Using only the first 60% of each battery history, the linear baseline projects the 1.4 Ah crossing 5.5 cycles late for B0005, 10.1 cycles early for B0006, and 0.2 cycles late for B0018. B0007 is projected to cross near cycle 150 even though its observed capacity remains above 1.4 Ah through cycle 168, exposing a false early threshold prediction and the limits of a single linear trend.','source':'NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)','retrieved':'2026-09-25'}
+print(json.dumps({'summary':summary,'battery_fits':out},indent=2))
