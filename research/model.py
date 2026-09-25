@@ -64,3 +64,5 @@ def validate_bundle():
         if (r["false_early_warning"].lower()=="true")!=z["false_early_warning"]:return False
     s=load_summary()["headline_metrics"]
     return s["n_discharge_cycles"]==636 and s["eol_threshold_ah"]==1.4 and s["b0007_false_early_warning_at_80"] is True
+
+# GitHub Actions verifies both offline and official-source rebuild paths.
