@@ -1,28 +1,27 @@
 {
   "study_title": "Forecast Maturity of Technical Performance Margin on NASA Li-ion Battery Aging Data",
-  "design": "Secondary fixed-checkpoint prognostics analysis of laboratory battery aging time series",
+  "design": "Secondary fixed-checkpoint prognostics analysis of four laboratory battery aging trajectories",
   "retrieved_for_analysis": "2026-09-25",
   "canonical_source": "NASA Ames Prognostics Center of Excellence Battery Data Set",
   "nasa_repository_page": "https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/",
   "nasa_open_data_page": "https://data.nasa.gov/dataset/li-ion-battery-aging-datasets",
   "official_archive_url": "https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip",
   "official_archive_sha256": "82302a7db4fc1b34e0b6676326610438d43b816bdf11a69d1d012a464ef2f92e",
-  "cells": [
-    "B0005",
-    "B0006",
-    "B0007",
-    "B0018"
-  ],
+  "cells": ["B0005", "B0006", "B0007", "B0018"],
+  "n_discharge_observations": 636,
+  "monitoring_checkpoints_cycles": [40, 60, 80],
   "eol_definition": "30% fade in rated capacity, from 2.0 Ah to 1.4 Ah",
+  "performance_margin_definition": "Measured discharge capacity minus 1.4 Ah",
   "raw_nasa_files_redistributed": false,
   "complete_derived_capacity_evidence_in_repository": true,
-  "rebuild_policy": "Official NASA archive only; nested ZIPs are recursively expanded and MATLAB files are parsed directly. No synthetic fallback.",
-  "convenience_crosscheck": {
-    "repository": "amirhossein-sadeghi2003/battery-health-forecasting-baselines",
-    "commit": "e414d2e00ecc369d042637df6a6147a948718649",
-    "file": "data/processed/discharge_capacity.csv",
-    "git_blob_sha": "adc395fdf25c6fa1b911535dc0ffc1c2a10e589e"
+  "rebuild_policy": "Official NASA archive only. Nested ZIPs are recursively expanded and MATLAB files are parsed directly. No synthetic fallback.",
+  "scientific_correction": "The prototype's first-60%-of-final-history split was horizon-dependent. The released protocol uses fixed checkpoints 40, 60, and 80 for every cell.",
+  "interpretation_notes": {
+    "tpm_framing": "Capacity is used as a laboratory performance parameter in a TPM-style monitoring case study, not as a complete system-level TPM.",
+    "forecast_revision": "Forecast revision is a descriptive stability measure and is not calibrated uncertainty.",
+    "b0007": "No 1.4 Ah crossing is observed through cycle 168; a projected crossing within that horizon is treated as a false early warning."
   },
-  "scientific_correction": "The prototype's first-60%-of-final-history split was horizon-dependent. Version 1.1 uses fixed checkpoints 40, 60, and 80 for every cell.",
-  "claim_boundary": "Transparent descriptive baseline on four NASA laboratory cells. Forecast revision is not calibrated uncertainty and results are not evidence of production readiness or cross-cell generalization."
+  "claim_boundary": "Transparent descriptive baseline on four NASA laboratory cells. Results are not evidence of production readiness, calibrated RUL uncertainty, state-of-the-art prognostics performance, or cross-cell and cross-chemistry generalization.",
+  "repository_slug": "technical_performance_margin_monitor",
+  "release_version": "1.2.0"
 }
