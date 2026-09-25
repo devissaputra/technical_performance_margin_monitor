@@ -1,12 +1,12 @@
 # Portfolio Track
 
-**Track:** Engineering Management Research  
+**Portfolio track:** Engineering Management Research  
+**Public presentation:** Research in System Engineering  
 **Repository:** `technical_performance_margin_monitor`  
-**Focus:** Systems Engineering / Technical Performance / Prognostics
+**Focus:** Systems Engineering / Technical Performance Monitoring / Prognostics
 
-This classification is part of an eight-repository empirical research portfolio with an intentional 4+4 split:
+This repository belongs to the Engineering Management Research portfolio track.
 
-- **4 repositories:** Learning & Development Research
-- **4 repositories:** Engineering Management Research
+On the public portfolio site, it is presented under **Research in System Engineering** because the central question concerns technical performance monitoring, evidence maturity, and engineering decision support.
 
-This repository belongs only to **Engineering Management Research** for portfolio indexing and GitHub presentation. Its methods may draw on adjacent disciplines, but that does not change its primary portfolio track.
+The portfolio track and public research heading are intentionally both retained.
