@@ -3,14 +3,11 @@
 ## Portfolio track
 **Engineering Management Research**
 
-## Repository slug
-`technical_performance_margin_monitor`
-
 ## About
-Empirical Systems Engineering study of leakage-safe technical-performance threshold forecasting on NASA battery-aging trajectories.
+NASA battery-aging study of technical-performance margin and forecast maturity at fixed 40/60/80-cycle monitoring checkpoints.
 
 ## Suggested topics
-engineering-management, systems-engineering, technical-performance-measures, prognostics, battery-aging, threshold-forecasting, nasa-data, secondary-analysis, empirical-research, reproducible-research
+engineering-management, systems-engineering, technical-performance-measures, prognostics, battery-aging, remaining-useful-life, nasa-data, predictive-maintenance, empirical-research, reproducible-research
 
-## Classification rule
-This repository belongs to the **Engineering Management Research** track in the eight-repository empirical research portfolio. Do not classify it under the other track.
+## Suggested website
+https://devissaputra.github.io/

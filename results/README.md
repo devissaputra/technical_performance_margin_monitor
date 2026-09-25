@@ -1,5 +1,9 @@
 # Results
 
-`empirical_summary.json` contains the machine-readable headline metrics and the bounded release finding for **Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data**.
+The release separates four layers:
+1. complete derived cycle evidence;
+2. cell-level observed threshold outcomes;
+3. fixed-checkpoint forecasts and revisions;
+4. aggregate forecast-maturity metrics.
 
-The JSON is generated/checked against the derived CSVs and study-specific analysis assumptions. It should not be edited independently of the data tables, documentation, tests, and figures.
+Headline interpretation is stored in `empirical_summary.json`. The CSV files under `data/derived/` are the authoritative offline evidence used by the tests.

@@ -5,16 +5,17 @@
 python -m pip install -r requirements.txt
 pytest -q
 python run_demo.py
+python scripts/generate_figures.py --out-dir /tmp/tpm_figures
 ```
 
-Offline tests operate on packaged derived evidence and study-specific pure functions.
+Offline tests reconstruct all checkpoint projections from the complete 636-row packaged cycle evidence.
 
-## Full source rebuild
+## Official NASA rebuild
 ```bash
-python scripts/fetch_and_analyze.py
+python scripts/fetch_and_analyze.py --check
 ```
 
-The rebuild requires internet access and retrieves the source recorded in `data/source_manifest.json`. It intentionally does not substitute generated observations if retrieval fails.
+This downloads the NASA Battery Data Set ZIP, recursively expands nested ZIPs, finds B0005/B0006/B0007/B0018 MATLAB files, extracts discharge capacity with SciPy, prints the archive SHA-256, and compares the rebuilt series and results with the packaged release.
 
-## Reproducibility boundary
-External sources can change or move. The manifest records the source identity, DOI/version where available, retrieval date, and reuse note. Derived results in this release correspond to the source state retrieved on 2026-09-25.
+## Failure policy
+There is no synthetic fallback. Missing cells, source drift, extraction mismatch, or result mismatch causes a non-zero exit.

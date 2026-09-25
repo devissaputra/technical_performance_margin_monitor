@@ -1,16 +1,22 @@
 # Data Dictionary
 
-## Provenance
-See `data/source_manifest.json`. Raw source observations are not silently republished.
+## `cycle_capacity_evidence.csv`
+Complete derived cycle-level evidence for the four selected NASA cells:
+- `battery`
+- `discharge_cycle`
+- `capacity_ah`
+- `margin_to_1_4_ah`
 
-## `data/derived/primary_results.csv`
-All four cells in the convenience discharge-capacity table, with the training-window endpoint shown explicitly.
+No charge/EIS waveforms or other raw NASA fields are redistributed.
 
-## `data/derived/secondary_results.csv`
-When present and non-empty, this contains a second derived table needed to reproduce a reported comparison. If empty, no second packaged table is required.
+## `battery_summary.csv`
+Cell-level cycle counts, first/final capacity, final margin, and first observed ≤1.4 Ah cycle.
 
-## `results/empirical_summary.json`
-Machine-readable headline sample sizes, estimates, and the release finding. Values must agree with README text and the derived CSVs.
+## `checkpoint_results.csv`
+One row per battery × checkpoint (12 rows) containing current margin, fitted slope, projected crossing cycle, observed crossing, signed error, forecast revision, horizon flag, and false-warning flag.
 
-## Construct boundary
-This is a transparent prognostics baseline, not a validated production health-management model. The processed CSV is a convenience derivative of the NASA source. B0007 demonstrates that a projected crossing inside the observed horizon need not actually occur; projection is not observation.
+## `checkpoint_aggregate.csv`
+Checkpoint-level MAE, median absolute error, mean forecast revision, and false-warning count.
+
+## Source
+All packaged evidence is checked by the official NASA-source rebuild.

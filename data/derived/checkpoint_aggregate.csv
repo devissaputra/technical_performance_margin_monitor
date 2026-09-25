@@ -1,0 +1,4 @@
+checkpoint_cycle,mae_cycles_crossing_cells,median_abs_error_cycles_crossing_cells,mean_forecast_revision_cycles,false_early_warnings
+40,102.399,18.069,,0
+60,35.852,9.715,100.046,0
+80,11.942,15.566,38.012,1

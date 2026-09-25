@@ -1,7 +1,5 @@
 # Manifest
 
-Release files (excluding generated test caches):
-
 - `.github/workflows/ci.yml`
 - `.github/workflows/empirical-rebuild.yml`
 - `.gitignore`
@@ -10,6 +8,7 @@ Release files (excluding generated test caches):
 - `EMPIRICAL_STUDY.md`
 - `GITHUB_METADATA.md`
 - `LICENSE`
+- `MANIFEST.md`
 - `Makefile`
 - `PORTFOLIO_TRACK.md`
 - `QA_REPORT.md`
@@ -17,11 +16,15 @@ Release files (excluding generated test caches):
 - `REPRODUCIBILITY.md`
 - `RESEARCH_BUNDLE.md`
 - `assets/architecture.svg`
+- `assets/checkpoint_error.svg`
 - `assets/evaluation.svg`
+- `assets/forecast_revision.svg`
 - `assets/method.svg`
-- `assets/research_design.svg`
 - `data/README.md`
-- `data/derived/primary_results.csv`
+- `data/derived/battery_summary.csv`
+- `data/derived/checkpoint_aggregate.csv`
+- `data/derived/checkpoint_results.csv`
+- `data/derived/cycle_capacity_evidence.csv`
 - `data/source_manifest.json`
 - `docs/analysis_plan.md`
 - `docs/data_dictionary.md`
@@ -37,4 +40,5 @@ Release files (excluding generated test caches):
 - `results/empirical_summary.json`
 - `run_demo.py`
 - `scripts/fetch_and_analyze.py`
+- `scripts/generate_figures.py`
 - `tests/test_model.py`

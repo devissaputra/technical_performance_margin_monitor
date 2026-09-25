@@ -1,22 +1,30 @@
 {
-  "study": "Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data",
+  "study": "Forecast Maturity of Technical Performance Margin on NASA Li-ion Battery Aging Data",
   "headline_metrics": {
     "n_discharge_cycles": 636,
     "eol_threshold_ah": 1.4,
-    "b0005_observed_eol_cycle": 125,
-    "b0005_projected_eol_cycle": 130.5,
-    "b0006_observed_eol_cycle": 109,
-    "b0006_projected_eol_cycle": 98.9,
-    "b0018_observed_eol_cycle": 97,
-    "b0018_projected_eol_cycle": 97.2,
-    "training_fraction": 0.6,
-    "b0005_projection_error_cycles": 5.5,
-    "b0006_projection_error_cycles": -10.1,
-    "b0018_projection_error_cycles": 0.2,
-    "b0007_projected_eol_cycle": 150.1,
-    "b0007_observed_eol_cycle": null
+    "monitoring_checkpoints_cycles": [
+      40,
+      60,
+      80
+    ],
+    "observed_eol_cycles": {
+      "B0005": 125,
+      "B0006": 109,
+      "B0007": null,
+      "B0018": 97
+    },
+    "checkpoint_80_mae_cycles_crossing_cells": 11.942,
+    "checkpoint_80_median_abs_error_cycles_crossing_cells": 15.566,
+    "mean_forecast_revision_40_to_60_cycles": 100.046,
+    "mean_forecast_revision_60_to_80_cycles": 38.012,
+    "b0005_projection_cycle_40": 413.782,
+    "b0005_projection_cycle_60": 216.817,
+    "b0005_projection_cycle_80": 145.025,
+    "b0007_projection_cycle_80": 158.219,
+    "b0007_false_early_warning_at_80": true
   },
-  "finding": "Using only the first 60% of each battery history, the linear baseline projects the 1.4 Ah crossing 5.5 cycles late for B0005, 10.1 cycles early for B0006, and 0.2 cycles late for B0018. B0007 is projected to cross near cycle 150 even though its observed capacity remains above 1.4 Ah through cycle 168, exposing a false early threshold prediction and the limits of a single linear trend.",
-  "source": "NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)",
+  "finding": "Fixed checkpoints remove future-horizon dependence. Across the three cells that later cross 1.4 Ah, mean absolute threshold-cycle error falls from 102.399 cycles at checkpoint 40 to 35.852 at 60 and 11.942 at 80. Mean forecast revision falls from 100.046 cycles between checkpoints 40→60 to 38.012 between 60→80, but substantial cell-level instability remains. At checkpoint 80, B0007 projects a crossing near cycle 158.219 although no 1.4 Ah crossing is observed through cycle 168.",
+  "source": "NASA Ames Prognostics Center of Excellence Battery Data Set (B0005, B0006, B0007, B0018)",
   "retrieved": "2026-09-25"
 }

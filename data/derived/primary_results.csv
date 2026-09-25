@@ -1,5 +1,0 @@
-battery,n_cycles,first_capacity_ah,last_capacity_ah,drop_pct,training_last_cycle_first_60pct,observed_first_cycle_le_1_4,projected_eol_cycle_from_first_60pct,projection_error_cycles
-B0005,168,1.8565,1.3251,28.62,100,125,130.5,5.5
-B0006,168,2.0353,1.1857,41.75,100,109,98.9,-10.1
-B0007,168,1.8911,1.4325,24.25,100,,150.1,
-B0018,132,1.855,1.3411,27.71,79,97,97.2,0.2

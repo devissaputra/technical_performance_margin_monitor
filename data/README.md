@@ -1,13 +1,17 @@
 # Data
 
-**Primary source:** NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)
+## Canonical source
+NASA Ames Prognostics Center of Excellence Battery Data Set.
 
-**Source page:** https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/
+Official archive:
+`https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip`
 
-**Reuse note:** Primary NASA dataset is public. The convenience CSV is a transparent extraction of NASA MATLAB files; cite NASA/Saha & Goebel and the conversion source.
+Cells used: B0005, B0006, B0007, B0018.
 
-Raw source observations are not bundled here by default. Derived tables are packaged under `data/derived/`; their completeness or subset status is stated in `docs/data_dictionary.md`.
+NASA states that the experiments use a 1.4 Ah end-of-life criterion corresponding to 30% fade from 2.0 Ah rated capacity.
 
-**Construct boundary:** This is a transparent prognostics baseline, not a validated production health-management model. The processed CSV is a convenience derivative of the NASA source. B0007 demonstrates that a projected crossing inside the observed horizon need not actually occur; projection is not observation.
+## Packaged data
+This repository does not bundle the NASA MATLAB files. It packages only compact derived capacity/margin evidence required for offline verification.
 
-**Pinned convenience extraction:** `amirhossein-sadeghi2003/battery-health-forecasting-baselines` at commit `e414d2e00ecc369d042637df6a6147a948718649` (`data/processed/discharge_capacity.csv`). Pinning prevents later changes on the third-party `main` branch from silently altering the released analysis.
+## Rebuild
+`python scripts/fetch_and_analyze.py --check` downloads the official NASA archive, recursively expands nested ZIP files, extracts the four MATLAB cells, rebuilds the discharge-capacity series, and verifies the packaged results.

@@ -1,104 +1,90 @@
-# Technical Performance Margin Monitoring on NASA Li-ion Battery Aging Data
+# Forecast Maturity of Technical Performance Margin on NASA Li-ion Battery Aging Data
 
-> **Empirical Research Bundle** · **Portfolio Track: Engineering Management Research** · Systems Engineering / Technical Performance / Prognostics
+> **Empirical Research Bundle** · **Engineering Management Research** · Systems Engineering / Technical Performance Measures / Prognostics
 
-Leakage-aware empirical threshold forecasting on NASA battery aging trajectories using only the first 60% of each cell history.
+This study asks a systems-engineering question: **how trustworthy is a threshold forecast at the moment a decision must be made?** It monitors battery capacity margin to NASA's 1.4 Ah end-of-life criterion at fixed 40, 60, and 80-cycle checkpoints, so the analysis does not need to know each cell's eventual lifetime in advance.
 
-![Empirical workflow](assets/architecture.svg)
+![Workflow](assets/architecture.svg)
 
-## Study status
+## Why this release is different
 
-**Completed secondary empirical analysis.** Reported findings were calculated from the named public source on 25 September 2026. The rebuild script contains **no synthetic fallback**. Raw source data are not republished unless source terms permit it; `data/source_manifest.json` records provenance, retrieval details, licensing notes, and the claim boundary.
+The prototype trained on the first 60% of each cell's final recorded history. That avoided training on the threshold crossing, but the cutoff still depended on knowing the eventual observation horizon. This release removes that retrospective dependency by using the same fixed checkpoints for every battery.
 
-## Research question
+## Research questions
 
-> How well can a transparent early-life capacity trend anticipate a 1.4 Ah end-of-life threshold without training on observations at or beyond that threshold?
+1. How does a transparent linear threshold forecast change as evidence accumulates at cycles 40, 60, and 80?
+2. Does threshold-cycle error decrease as the monitoring checkpoint moves closer to the eventual 1.4 Ah crossing?
+3. Can a forecast enter the observed operating horizon and still produce a false early warning?
 
-## Design
+## Data and engineering threshold
 
-- **Design:** Secondary prognostics analysis of laboratory battery aging time series
-- **Source:** NASA Ames PCoE Li-ion Battery Aging Dataset (B0005, B0006, B0007, B0018)
-- **Source page:** https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/
-- **Direct data endpoint:** `https://raw.githubusercontent.com/amirhossein-sadeghi2003/battery-health-forecasting-baselines/e414d2e00ecc369d042637df6a6147a948718649/data/processed/discharge_capacity.csv`
-- **Retrieval / analysis date:** 2026-09-25
-- **Licensing / reuse note:** Primary NASA dataset is public. The convenience CSV is a transparent extraction of NASA MATLAB files; cite NASA/Saha & Goebel and the conversion source.
+NASA's Li-ion aging experiments define end of life as a **30% fade in rated capacity, from 2.0 Ah to 1.4 Ah**. The four cells studied are B0005, B0006, B0007, and B0018. The official NASA PCoE Battery Data Set archive is the canonical rebuild source.
 
-## Hypotheses
+Capacity margin is:
 
-1. H1: an early-life linear capacity trend can provide a useful but imperfect threshold-crossing baseline.
-2. H2: forecast error varies materially across cells, revealing trajectory heterogeneity that a single deterministic trend does not capture.
-3. H3: a model may predict an early threshold crossing that the observed series does not realize, providing a concrete false-warning case.
+```text
+technical performance margin = measured discharge capacity − 1.4 Ah
+```
 
-## Empirical method
+This is a laboratory performance-margin application of TPM monitoring principles, not a claim that battery capacity is a complete project-level TPM.
 
-For each battery, use discharge capacity as the technical performance measure and define margin = capacity − 1.4 Ah. Fit ordinary least squares capacity versus discharge index using only the first 60% of that battery’s observed cycles, then project the 1.4 Ah crossing and compare it with the first observed crossing when one exists. The 60% cutoff keeps every observed crossing outside the training window.
+## Method
+
+At each fixed checkpoint (40, 60, 80 discharge cycles), fit ordinary least squares:
+
+```text
+capacity = intercept + slope × discharge_cycle
+```
+
+using only observations available at that checkpoint. If slope is negative, solve for the projected cycle at which capacity reaches 1.4 Ah. Later observations are used only for evaluation.
 
 ![Method](assets/method.svg)
 
-## Headline empirical finding
+## Main empirical result
 
-Using only the first 60% of each history, the linear baseline is 5.5 cycles late for B0005, 10.1 cycles early for B0006, and 0.2 cycles late for B0018. For B0007 it predicts a crossing near cycle 150 even though observed capacity remains above 1.4 Ah through cycle 168, a false early threshold prediction.
+| Checkpoint | MAE across cells with observed crossing | Mean forecast revision | False early warnings |
+|---:|---:|---:|---:|
+| 40 | 102.399 cycles | — | 0 |
+| 60 | 35.852 cycles | 100.046 cycles | 0 |
+| 80 | 11.942 cycles | 38.012 cycles | 1 |
 
-### Headline metrics
+Forecasts mature with additional evidence on average, but not uniformly. B0005's projected threshold shifts from **413.782 → 216.817 → 145.025 cycles**. At checkpoint 80, B0007 projects a crossing at **158.219**, inside its 168-cycle observed horizon, yet the cell never reaches 1.4 Ah in the recorded series.
 
-- **n discharge cycles**: 636
-- **eol threshold ah**: 1.4
-- **b0005 observed eol cycle**: 125
-- **b0005 projected eol cycle**: 130.5
-- **b0006 observed eol cycle**: 109
-- **b0006 projected eol cycle**: 98.9
-- **b0018 observed eol cycle**: 97
-- **b0018 projected eol cycle**: 97.2
-- **training fraction**: 0.6
-- **b0005 projection error cycles**: 5.5
-- **b0006 projection error cycles**: -10.1
-- **b0018 projection error cycles**: 0.2
-- **b0007 projected eol cycle**: 150.1
-- **b0007 observed eol cycle**: None
+![Checkpoint error](assets/checkpoint_error.svg)
 
-The packaged derived tables are documented in `docs/data_dictionary.md`. That document states explicitly whether each CSV is a complete analysis table or a diagnostic subset.
+![Forecast revision](assets/forecast_revision.svg)
 
-![Research evidence](assets/research_design.svg)
+## Interpretation
 
-## What this study can and cannot claim
+The key result is not that a straight line predicts battery EOL well. It is that **forecast maturity is itself a technical quantity worth monitoring**. Early projections can move by tens or hundreds of cycles as additional evidence arrives. A TPM-style dashboard should therefore track both margin to requirement and the stability of the forecast used to anticipate margin exhaustion.
 
-**Can claim:** the computations in this repository summarize the named public dataset under the documented operationalization.
+## Claim boundary
 
-**Cannot claim:** This is a transparent prognostics baseline, not a validated production health-management model. The processed CSV is a convenience derivative of the NASA source. B0007 demonstrates that a projected crossing inside the observed horizon need not actually occur; projection is not observation.
+**Supported:** descriptive behavior of this transparent baseline on the four NASA cells; fixed-checkpoint forecast error; forecast revisions; B0007 false early warning at checkpoint 80.
 
-![Finding and boundary](assets/evaluation.svg)
+**Not supported:** production battery-health management, generalization to other cells or chemistries, calibrated uncertainty, causal claims, or superiority over modern prognostics models.
+
+![Evidence boundary](assets/evaluation.svg)
 
 ## Reproduce
 
-Offline verification of packaged empirical results:
+Offline:
 
 ```bash
 python -m pip install -r requirements.txt
 pytest -q
 python run_demo.py
+python scripts/generate_figures.py --out-dir /tmp/tpm_figures
 ```
 
-Recompute the empirical analysis from the public source (internet required):
+Official NASA source rebuild:
 
 ```bash
-python scripts/fetch_and_analyze.py
+python scripts/fetch_and_analyze.py --check
 ```
 
-The online rebuild calls study-specific functions from `research/model.py`; the tests exercise those functions and scientific invariants rather than only checking file presence.
-
-## Research bundle contents
-
-- `README.md` — study overview and bounded findings
-- `EMPIRICAL_STUDY.md` — protocol, validity, and interpretation
-- `data/source_manifest.json` — provenance, license note, and claim boundary
-- `data/derived/` — compact derived empirical tables
-- `results/empirical_summary.json` — machine-readable headline results
-- `scripts/fetch_and_analyze.py` — public-source rebuild
-- `research/model.py` — reusable study-specific analysis functions
-- `tests/` — behavioral and scientific-invariant tests
-- `docs/` — analysis plan, data dictionary, paper blueprint, references, originality map
-- `assets/` — four study-specific SVG figures
+The rebuild downloads NASA's official Battery Data Set archive, recursively extracts nested ZIPs, reads B0005/B0006/B0007/B0018 MATLAB files, reconstructs all 636 discharge-capacity observations, and compares them against the packaged evidence.
 
 ## Research integrity
 
-This bundle distinguishes **source data**, **operationalization**, **result**, and **interpretation**. The analysis plan documents the released analysis; it is **not described as preregistered**. Public data do not automatically validate a construct, so proxy and external-validity limits are explicit.
+This analysis is **not preregistered**. The checkpoint design is a correction to the original retrospective-horizon split. The repository reports the correction explicitly rather than presenting the revised protocol as if it had been specified in advance.

@@ -1,23 +1,23 @@
 # Final QA Report
 
-**Release status: PASS after correction.**
+**Release status: PENDING GITHUB-HOSTED VERIFICATION AFTER SCIENTIFIC REPAIR.**
 
-## Checks completed
-- provenance and source identity reviewed;
-- licensing/reuse note recorded;
-- derived CSV structure checked against the stated sample and estimand;
-- `results/empirical_summary.json` reconciled with packaged evidence;
-- README/report language reconciled with the numerical results;
-- study-specific methods moved into `research/model.py`;
-- tests exercise scientific logic and invariants;
-- internet rebuild script has no synthetic fallback;
-- four SVG assets regenerated as study-specific figures and XML-validated;
-- local Markdown links checked;
-- citation metadata points to the final repository slug;
-- no preregistration claim is made.
+## Repair scope
+- replaced horizon-dependent 60%-of-final-history fitting with fixed 40/60/80-cycle checkpoints;
+- reframed the contribution around forecast maturity and revision;
+- made the official NASA Battery Data Set archive the canonical rebuild source;
+- packaged complete 636-cycle derived capacity/margin evidence;
+- added cell summaries, 12 checkpoint results, and checkpoint aggregate results;
+- added exact offline recomputation tests;
+- added official-source rebuild with nested ZIP and MATLAB extraction;
+- added CI and empirical-source workflows;
+- added reproducible five-figure generation;
+- restored complete MIT license;
+- removed stale portfolio references;
+- synchronized README, protocol, design, analysis plan, paper blueprint, provenance, references, results, citation metadata, and manifest.
 
-## Final empirical finding
-Using only the first 60% of each history, the linear baseline is 5.5 cycles late for B0005, 10.1 cycles early for B0006, and 0.2 cycles late for B0018. For B0007 it predicts a crossing near cycle 150 even though observed capacity remains above 1.4 Ah through cycle 168, a false early threshold prediction.
+## Current empirical headline
+Crossing-cycle MAE across B0005/B0006/B0018 declines from 102.399 cycles at checkpoint 40 to 35.852 at 60 and 11.942 at 80. Mean forecast revision declines from 100.046 cycles for 40→60 to 38.012 for 60→80. B0007 generates a false early warning at checkpoint 80.
 
-## Required interpretation boundary
-This is a transparent prognostics baseline, not a validated production health-management model. The processed CSV is a convenience derivative of the NASA source. B0007 demonstrates that a projected crossing inside the observed horizon need not actually occur; projection is not observation.
+## Release condition
+Mark PASS only after regular CI and the official NASA empirical rebuild both succeed.
