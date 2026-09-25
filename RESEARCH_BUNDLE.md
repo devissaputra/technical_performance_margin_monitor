@@ -1,12 +1,39 @@
-# Research Bundle Definition
+# Research Package Definition
 
-This repository is a Research Bundle because it links a systems-engineering monitoring question to an official NASA source, complete derived evidence, a prospective fixed-checkpoint protocol, executable analysis, robustness through multiple evidence horizons, reproducible figures, tests, and source-rebuild CI.
+This repository qualifies as a research package because a systems engineering monitoring question is connected to an official NASA source, complete derived evidence, a future independent fixed checkpoint protocol, executable analysis, cell level and aggregate evaluation, reproducible figures, tests, and official source rebuild CI.
+
+## Core research problem
+
+How should decision makers interpret a projected requirement boundary crossing when the forecast itself changes as evidence accumulates?
+
+## Empirical core
+
+Four NASA battery aging trajectories, three common monitoring checkpoints, and a transparent linear threshold projection.
 
 ## Scientific correction
-The prototype's 60%-of-final-history split was horizon-dependent. Version 1.1 replaces it with fixed 40/60/80-cycle checkpoints.
+
+The prototype's first 60% of eventual history split was horizon dependent.
+
+The released protocol uses cycles 40, 60, and 80 for every cell.
 
 ## Main inference
-Forecast accuracy generally improves as evidence accumulates, but forecast revisions remain material and can generate false early warnings. Forecast stability should therefore be monitored alongside projected margin exhaustion.
+
+Aggregate forecast error falls as evidence accumulates, but cell level forecast quality is heterogeneous and a later checkpoint does not guarantee a better forecast for every cell.
+
+Forecast revision and false warning behavior therefore belong alongside current margin and projected threshold timing.
 
 ## Release criterion
-PASS requires agreement among official NASA source extraction, packaged 636-cycle evidence, checkpoint tables, summary JSON, figures, tests, and both GitHub Actions workflows.
+
+PASS requires agreement among:
+
+- official NASA source extraction;
+- archive SHA 256;
+- all 636 packaged capacity observations;
+- battery summaries;
+- 12 checkpoint results;
+- aggregate metrics;
+- machine readable summary;
+- figures;
+- tests;
+- README and scientific report;
+- both GitHub Actions workflows.
