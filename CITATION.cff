@@ -1,19 +1,20 @@
 cff-version: 1.2.0
-message: "If you use this empirical research bundle, cite this repository and the NASA Battery Data Set."
+message: "If you use this systems engineering research package, cite this repository and the NASA Battery Data Set."
 title: "Forecast Maturity of Technical Performance Margin on NASA Li-ion Battery Aging Data"
 type: software
 authors:
   - family-names: Saputra
     given-names: Devis W.
-version: 1.1.0
+version: 1.2.0
 date-released: 2026-09-25
 license: MIT
 repository-code: "https://github.com/devissaputra/technical_performance_margin_monitor"
 keywords:
-  - engineering-management
   - systems-engineering
+  - engineering-management
   - technical-performance-measures
   - prognostics
   - battery-aging
+  - forecast-maturity
   - nasa-data
   - reproducible-research
